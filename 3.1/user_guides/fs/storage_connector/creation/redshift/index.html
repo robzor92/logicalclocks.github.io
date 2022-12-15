@@ -1465,26 +1465,12 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#step-3-upload-the-redshift-database-driver" class="md-nav__link">
-    Step 3: Upload the Redshift database driver
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#step-3-upload-the-redshift-database-driver-optional" class="md-nav__link">
     Step 3: Upload the Redshift database driver (optional)
   </a>
   
     <nav class="md-nav" aria-label="Step 3: Upload the Redshift database driver (optional)">
       <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#upload-the-driver-to-hopsworks" class="md-nav__link">
-    Upload the driver to Hopsworks
-  </a>
-  
-</li>
         
           <li class="md-nav__item">
   <a href="#add-the-driver-to-jupyter-notebooks-and-spark-jobs" class="md-nav__link">
@@ -5240,26 +5226,12 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#step-3-upload-the-redshift-database-driver" class="md-nav__link">
-    Step 3: Upload the Redshift database driver
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#step-3-upload-the-redshift-database-driver-optional" class="md-nav__link">
     Step 3: Upload the Redshift database driver (optional)
   </a>
   
     <nav class="md-nav" aria-label="Step 3: Upload the Redshift database driver (optional)">
       <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#upload-the-driver-to-hopsworks" class="md-nav__link">
-    Upload the driver to Hopsworks
-  </a>
-  
-</li>
         
           <li class="md-nav__item">
   <a href="#add-the-driver-to-jupyter-notebooks-and-spark-jobs" class="md-nav__link">
@@ -5316,7 +5288,10 @@ When you're finished, you'll be able to query the database using Spark through H
 <li><strong>Database endpoint:</strong> The endpoint for the database. Should be in the format of <code>[UUID].eu-west-1.redshift.amazonaws.com</code>.</li>
 <li><strong>Database name:</strong> The name of the database to query.</li>
 <li><strong>Database port:</strong> The port of the cluster. Defaults to 5349.</li>
-<li><strong>Authentication method:</strong> There are two options available for authenticating with the Redshift cluster. The first option is to configure a username and a password. The second option is to configure an IAM role. With IAM roles, Jobs or notebooks launched on Hopsworks do not need to explicitly authenticate with Redshift, as the HSFS library will transparently use the IAM role to acquire a temporary credential to authenticate the specified user. Read more about IAM roles in our <a href="../../../../../admin/roleChaining/">AWS credentials passthrough guide</a></li>
+<li><strong>Authentication method:</strong> There are two options available for authenticating with the Redshift cluster. The first option is to configure a username and a password. 
+The second option is to configure an IAM role. With IAM roles, Jobs or notebooks launched on Hopsworks do not need to explicitly authenticate with Redshift, as the HSFS library will transparently use the IAM role to acquire a temporary credential to authenticate the specified user. 
+Read more about IAM roles in our <a href="../../../../../admin/roleChaining/">AWS credentials passthrough guide</a>. Note, the option <code>Instance Role</code> allows the user to save the connector.
+  However, this option does not yet support reading from the connector.</li>
 </ul>
 <h2 id="creation-in-the-ui">Creation in the UI<a class="headerlink" href="#creation-in-the-ui" title="Permanent link">#</a></h2>
 <h3 id="step-1-set-up-new-storage-connector">Step 1: Set up new storage connector<a class="headerlink" href="#step-1-set-up-new-storage-connector" title="Permanent link">#</a></h3>
@@ -5331,15 +5306,17 @@ When you're finished, you'll be able to query the database using Spark through H
 <ol>
 <li>Select "Redshift" as connector protocol.</li>
 <li>The name of the cluster.</li>
-<li>The name of the database driver class.</li>
-<li>The database endpoint.</li>
+<li>The database endpoint. Should be in the format <code>[UUID].eu-west-1.redshift.amazonaws.com</code>. For example, if the endpoint info 
+   displayed in Redshift is <code>cluster-id.uuid.eu-north-1.redshift.amazonaws.com:5439/dev</code> the value to enter 
+   here is just <code>uuid.eu-north-1.redshift.amazonaws.com</code> </li>
 <li>The database name.</li>
 <li>The database port.</li>
 <li>The database username, here you have the possibility to let Hopsworks auto-create the username for you.</li>
 <li>Database Driver (optional): You can use the default JDBC Redshift Driver <code>com.amazon.redshift.jdbc42.Driver</code> 
    included in Hopsworks or set a different driver (More on this later).</li>
-<li>Optionally provide the database group and table to point the connector to.</li>
-<li>Set the appropriate authentication method.</li>
+<li>Optionally provide the database group and table for the connector. A database group is the group created 
+   for the user if applicable. More information, at <a href="https://docs.aws.amazon.com/redshift/latest/dg/r_Groups.html">redshift documentation</a></li>
+<li>Set the appropriate authentication method. </li>
 </ol>
 <figure>
 <p><img alt="Redshift Connector Creation" src="../../../../../assets/images/guides/fs/storage_connector/redshift_creation.png" />
@@ -5352,34 +5329,33 @@ When you're finished, you'll be able to query the database using Spark through H
 This means if you want to use the storage connector for example to <a href="../../usage/##creating-an-external-feature-group">read or create an external Feature Group from Redshift</a>, the operation cannot take longer than one hour.</p>
 <p>Your administrator can change the default session duration for AWS storage connectors, by first <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html#id_roles_use_view-role-max-session">increasing the max session duration of the IAM Role</a> that you are assuming. And then changing the <code>fs_storage_connector_session_duration</code> <a href="../../../../../admin/variables/">configuration property</a> to the appropriate value in seconds.</p>
 </div>
-<h3 id="step-3-upload-the-redshift-database-driver">Step 3: Upload the Redshift database driver<a class="headerlink" href="#step-3-upload-the-redshift-database-driver" title="Permanent link">#</a></h3>
 <h3 id="step-3-upload-the-redshift-database-driver-optional">Step 3: Upload the Redshift database driver (optional)<a class="headerlink" href="#step-3-upload-the-redshift-database-driver-optional" title="Permanent link">#</a></h3>
 <p>The <code>redshift-jdbc42</code> JDBC driver is included by default in the Hopsworks distribution. 
 If you wish to use a different driver, you need to upload it on Hopsworks and add it as a dependency of Jobs and Jupyter Notebooks that need it. First, you need to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/jdbc20-download-driver.html">download the library</a>. Select the driver version without the AWS SDK.</p>
-<h4 id="upload-the-driver-to-hopsworks">Upload the driver to Hopsworks<a class="headerlink" href="#upload-the-driver-to-hopsworks" title="Permanent link">#</a></h4>
-<p>You then upload the driver files to the “Resources” directory in your project, see the screenshot below.</p>
-<ol>
-<li>Open the File Browser.</li>
-<li>Move into the "Resources" directory.</li>
-<li>Upload the driver jar file.</li>
-</ol>
-<figure>
-<p><img alt="Redshift Driver Upload" src="../../../../../assets/images/guides/fs/storage_connector/driver_upload.png" />
-  </p>
-<figcaption>Redshift Driver Upload in the Filesystem Browser</figcaption>
-</figure>
 <h4 id="add-the-driver-to-jupyter-notebooks-and-spark-jobs">Add the driver to Jupyter Notebooks and Spark jobs<a class="headerlink" href="#add-the-driver-to-jupyter-notebooks-and-spark-jobs" title="Permanent link">#</a></h4>
 <p>You can now add the driver file to the default job and Jupyter configuration. This way, all jobs and Jupyter instances in the project will have the driver attached so that Spark can access it.</p>
 <ol>
 <li>Go into the Project's settings.</li>
 <li>Select "Compute configuration".</li>
 <li>Select "Spark".</li>
-<li>Select and Upload the jar file in the "additional jars" section of the configuration.</li>
+<li>Under "Additional Jars" choose "Upload new file" to upload the driver jar file.</li>
 </ol>
 <figure>
-<p><img alt="Redshift Driver Job and Jupyter Configuration" src="../../../../../assets/images/guides/fs/storage_connector/driver_upload.png" />
+<p><img alt="Redshift Driver Job and Jupyter Configuration" src="../../../../../assets/images/guides/fs/storage_connector/jupyter_config.png" />
   </p>
 <figcaption>Attaching the Redshift Driver to all Jobs and Jupyter Instances of the Project</figcaption>
+</figure>
+<p>Alternatively, you can choose the "From Project" option. You will first have to upload the jar file to the Project using the File Browser. After you have uploaded the jar 
+file, you can select it using the "From Project" option. To upload the jar file to the Project through the File Browser, see the example below:</p>
+<ol>
+<li>Open File Browser</li>
+<li>Navigate to "Resources" directory</li>
+<li>Upload the jar file</li>
+</ol>
+<figure>
+<p><img alt="Redshift Driver Upload" src="../../../../../assets/images/guides/fs/storage_connector/driver_upload.png" />
+  </p>
+<figcaption>Redshift Driver Upload in the File Browser</figcaption>
 </figure>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
