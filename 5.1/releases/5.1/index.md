@@ -354,7 +354,7 @@ Helm chart 5.1.0 · Released on 2026-09-24 · Changes since [5.0.0][hopsworks-5-
 
 ### Upgrade steps
 
-No upgrade steps are listed for this release.
+Follow [Before every upgrade][docs-upgrade-before] and [5.0.x to 5.1.x][docs-upgrade-50-to-51] in the upgrade guide, which the docs have from 5.2 on.
 
 ### Upgraded components
 
@@ -464,6 +464,8 @@ No upgrade steps are listed for this release.
 [docs-sql-runner]: https://docs.hopsworks.ai/5.1/user_guides/projects/trino/query_engine/#sql-runner
 [docs-trino-history]: https://docs.hopsworks.ai/5.1/setup_installation/admin/trino/#query-history
 [values-olk-index-upgrade]: https://docs.hopsworks.ai/5.1/setup_installation/common/helm_chart_values/olk/#helm.olk.opensearch.indexUpgrade.mode
+[docs-upgrade-before]: https://docs.hopsworks.ai/5.2/setup_installation/admin/upgrade/#upgrade-before-every-upgrade
+[docs-upgrade-50-to-51]: https://docs.hopsworks.ai/5.2/setup_installation/admin/upgrade/#upgrade-50-to-51
 
 ### Python client
 
