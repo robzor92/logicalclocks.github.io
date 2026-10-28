@@ -59372,7 +59372,7 @@ Helm chart 5.1.0 · Released on 2026-09-24 · Changes since [5.0.0][hopsworks-5-
 - [HELM] Fixed the KServe local model controller image (`kserve.kserve.localmodel.enabled`) failing to pull (also in [5.0.9][hopsworks-5-0-9]).
 - [HELM] Fixed the OpenSearch metrics exporter reporting the parent cluster on a satellite deployment, and missing OpenSearch with a custom `global._hopsworks.consulDomainName` (also in [5.0.13][hopsworks-5-0-13]).
 - Addressed vulnerabilities in the Hopsworks server dependencies and in the Superset, Grafana, Prometheus, Consul, certificates operator, Docker registry, BuildKit, Istio, Knative Serving, KServe utilities, scikit-learn model server, Strimzi, OpenSearch, OpenSearch Dashboards, Logstash, Filebeat, Spark operator, KubeRay operator, Vertical Pod Autoscaler installer, Spark history server, Hive Metastore, model serving webhook, model serving authenticator, inference logger, storage initializer, remote shuffle service, Git and base environment images.
-- Addressed vulnerabilities in the Hopsworks server dependencies, in the Payara, HopsFS, Hive Metastore, ArrowFlight, OnlineFS, Airflow, Git, toolbox, base environment, Filebeat, Grafana, OpenSearch, OpenSearch Dashboards, Logstash, remote shuffle service and Superset images, and in the MySQL database of Superset (also in [5.0.8][hopsworks-5-0-8]).
+- Addressed vulnerabilities in the Hopsworks server dependencies, in the Payara, HopsFS, Hive Metastore, ArrowFlight, OnlineFS, Airflow, Git, toolbox, base environment, Filebeat, Grafana, OpenSearch, OpenSearch Dashboards, Logstash, remote shuffle service, Spark history server and Superset images, and in the MySQL database of Superset (also in [5.0.8][hopsworks-5-0-8]).
 - Addressed vulnerabilities in the Hopsworks and Hopsworks CA images (also in [5.0.6][hopsworks-5-0-6] and [5.0.9][hopsworks-5-0-9]).
 - Addressed vulnerabilities in the MySQL database of Superset (also in [5.0.1][hopsworks-5-0-1]).
 - Addressed vulnerabilities in the Strimzi operator and Kafka images (also in [5.0.3][hopsworks-5-0-3]).
@@ -59858,7 +59858,7 @@ Helm chart 5.0.8 · Released on 2026-08-21 · Changes since [5.0.6][hopsworks-5-
 - [HELM] Fixed Kafka failing to start on clusters with many API groups, such as OpenShift, when the Vertical Pod Autoscaler (`global._hopsworks.vpaEnabled`) is on, because pod creation stalled for about 20 seconds.
 - [HELM] Added `hopsworks.jupyter.notebookConfig.enableUploads`; set it to `false` to block file uploads from the Jupyter UI and base64 uploads through the Jupyter Contents API.
 - [HELM] Fixed Superset queries through Trino logging `Access Denied: Cannot access catalog system`, and project creation and new project members logging Trino `Access Denied: Invalid credentials` errors before their Superset connection is ready.
-- Addressed vulnerabilities in the Hopsworks server dependencies, in the Payara, HopsFS, Hive Metastore, ArrowFlight, OnlineFS, Airflow, Git, toolbox, base environment, Filebeat, Grafana, OpenSearch, OpenSearch Dashboards, Logstash, remote shuffle service and Superset images, and in the MySQL database of Superset.
+- Addressed vulnerabilities in the Hopsworks server dependencies, in the Payara, HopsFS, Hive Metastore, ArrowFlight, OnlineFS, Airflow, Git, toolbox, base environment, Filebeat, Grafana, OpenSearch, OpenSearch Dashboards, Logstash, remote shuffle service, Spark history server and Superset images, and in the MySQL database of Superset.
 
 ### Breaking changes
 
